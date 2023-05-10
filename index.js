@@ -19,34 +19,67 @@ function getComputerChoice() {
     let randomIndex = Math.floor(Math.random() * arr.length);
     return arr[randomIndex]
 }
-let computerChoice =  getComputerChoice();
-console.log(computerChoice)
+// let computerChoice =  getComputerChoice();
+// console.log(computerChoice)
 
-// Take player's input
 
-let playerChoice = prompt("Enter your choice: ").toLowerCase()
-console.log(playerChoice)
 
-function singleRound(computerChoice, playerChoice) {
+
+
+function playRound(computerChoice, playerChoice) {
+
     if (computerChoice === playerChoice) {
-        console.log("Tie")
+        return "Tie"
     } else if (computerChoice === "rock" && playerChoice === "paper") {
-        console.log("You Win! Paper beats Rock")
+        return "You Win! Paper beats Rock"
     } else if (computerChoice === "paper" && playerChoice === "rock") {
-        console.log("You Lose! Paper beats Rock")
+        return "You Lose! Paper beats Rock"
     } else if (computerChoice === "rock" && playerChoice === "scissors") {
-        console.log('You Lose! Rock beats scissors')
+        return 'You Lose! Rock beats scissors'
     } else if (computerChoice === "scissors" && playerChoice === "rock") {
-        console.log('You Win! Rock beats scissors')
+        return 'You Win! Rock beats scissors'
     } else if (computerChoice === "paper" && playerChoice === "scissors") {
-        console.log('You Win! Scissors beat Paper')
+        return 'You Win! Scissors beat Paper'
     } else if (computerChoice === "scissors" && playerChoice === "paper") {
-        console.log('You Lose! Scissors beat Paper')
+        return 'You Lose! Scissors beat Paper'
     } else {
-        console.log("Invalid choice")
+        return "Invalid choice"
     }
 
 }
 
-singleRound(computerChoice, playerChoice)
+// let singleRound = playRound(computerChoice, playerChoice)
+
+// Five rounds
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for(i = 0; i < 5; i++) {
+        // Take player's input
+        let playerChoice = prompt("Enter your choice: ").toLowerCase()
+        // console.log(playerChoice)
+        let computerChoice =  getComputerChoice();
+        // console.log(computerChoice)
+        let result = playRound(computerChoice, playerChoice)
+        console.log(result)
+
+        if (result.includes("Win")) {
+            playerScore++
+        } else if (result.includes("Lose")) {
+            computerScore++
+        }
+
+
+    }
+    if (computerScore == playerScore) {
+        console.log("It's a Tie!")
+    } else if (computerScore < playerScore) {
+        console.log("You Win the Game!")
+    } else {
+        console.log("You Lose the Game!")
+    }
+}
+
+game();
 
